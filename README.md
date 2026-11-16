@@ -1,17 +1,19 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# Brain Up Labs
 
-# Run the app
+Marketing website for Brain Up Labs' STEM, AI, and robotics education programmes.
 
-This contains everything you need to run your app locally.
+## Development
 
-## Run Locally
+Requires Node.js and pnpm.
 
-**Prerequisites:**  Node.js
+```sh
+pnpm install
+pnpm dev
+```
 
+## Production checks
 
-1. Install dependencies:
-   `pnpm install`
-2. Run the app:
-   `pnpm dev`
+```sh
+pnpm lint
+pnpm build
+```
