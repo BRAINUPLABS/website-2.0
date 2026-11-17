@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BookOpen, CalendarDays, ChevronRight, FolderOpen, Home, Menu, Package, ReceiptText, Rocket, School, Users, X } from 'lucide-react';
+import { motion } from 'motion/react';
 import { NavigationPath } from '../types.ts';
 
 interface HeaderProps {
@@ -71,12 +72,13 @@ export const Header: React.FC<HeaderProps> = ({
               onClick={() => handleNavClick('home')}
               aria-label="Home"
               title="Home"
-              className={`flex items-center gap-1 px-3 py-2 rounded-lg transition-colors cursor-pointer ${
+              className={`relative isolate flex items-center gap-1 px-3 py-2 rounded-lg transition-colors cursor-pointer ${
                 currentPath === 'home'
-                  ? 'bg-surface-container-high text-secondary font-bold'
+                  ? 'text-secondary font-bold'
                   : 'text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface'
               }`}
             >
+              {currentPath === 'home' && <motion.span layoutId="active-navigation-tab" className="pointer-events-none absolute inset-0 -z-10 rounded-lg bg-surface-container-high" transition={{ type: 'spring', stiffness: 380, damping: 30 }} />}
               <Home size={19} className={`shrink-0 overflow-hidden transition-all duration-300 ${isCompact ? 'max-w-6 opacity-100' : 'max-w-0 opacity-0'}`} />
               <span className={`overflow-hidden whitespace-nowrap transition-all duration-300 ${isCompact ? 'max-w-0 opacity-0' : 'max-w-16 opacity-100'}`}>Home</span>
             </button>
@@ -91,12 +93,13 @@ export const Header: React.FC<HeaderProps> = ({
                 onClick={() => handleNavClick('for-schools')}
                 aria-label="For Schools"
                 title="For Schools"
-                className={`flex items-center gap-1 px-3 py-2 rounded-lg transition-colors cursor-pointer ${
+                className={`relative isolate flex items-center gap-1 px-3 py-2 rounded-lg transition-colors cursor-pointer ${
                   currentPath === 'for-schools' || currentPath === 'lab-setup'
-                    ? 'bg-surface-container-high text-secondary font-bold'
+                    ? 'text-secondary font-bold'
                     : 'text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface'
                 }`}
               >
+                {(currentPath === 'for-schools' || currentPath === 'lab-setup') && <motion.span layoutId="active-navigation-tab" className="pointer-events-none absolute inset-0 -z-10 rounded-lg bg-surface-container-high" transition={{ type: 'spring', stiffness: 380, damping: 30 }} />}
                 <School size={19} className={`shrink-0 overflow-hidden transition-all duration-300 ${isCompact ? 'max-w-6 opacity-100' : 'max-w-0 opacity-0'}`} />
                 <span className={`overflow-hidden whitespace-nowrap transition-all duration-300 ${isCompact ? 'max-w-0 opacity-0' : 'max-w-28 opacity-100'}`}>For Schools</span>
               </button>
@@ -166,12 +169,13 @@ export const Header: React.FC<HeaderProps> = ({
                 onClick={() => handleNavClick('stem-kits')}
                 aria-label="STEM Kits"
                 title="STEM Kits"
-                className={`flex items-center gap-1 px-3 py-2 rounded-lg transition-colors cursor-pointer ${
+                className={`relative isolate flex items-center gap-1 px-3 py-2 rounded-lg transition-colors cursor-pointer ${
                   currentPath === 'stem-kits'
-                    ? 'bg-surface-container-high text-secondary font-bold'
+                    ? 'text-secondary font-bold'
                     : 'text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface'
                 }`}
               >
+                {currentPath === 'stem-kits' && <motion.span layoutId="active-navigation-tab" className="pointer-events-none absolute inset-0 -z-10 rounded-lg bg-surface-container-high" transition={{ type: 'spring', stiffness: 380, damping: 30 }} />}
                 <Package size={19} className={`shrink-0 overflow-hidden transition-all duration-300 ${isCompact ? 'max-w-6 opacity-100' : 'max-w-0 opacity-0'}`} />
                 <span className={`overflow-hidden whitespace-nowrap transition-all duration-300 ${isCompact ? 'max-w-0 opacity-0' : 'max-w-20 opacity-100'}`}>STEM Kits</span>
               </button>
@@ -223,12 +227,13 @@ export const Header: React.FC<HeaderProps> = ({
                 onClick={() => handleNavClick('programs')}
                 aria-label="Programs"
                 title="Programs"
-                className={`flex items-center gap-1 px-3 py-2 rounded-lg transition-colors cursor-pointer ${
+                className={`relative isolate flex items-center gap-1 px-3 py-2 rounded-lg transition-colors cursor-pointer ${
                   currentPath === 'programs'
-                    ? 'bg-surface-container-high text-secondary font-bold'
+                    ? 'text-secondary font-bold'
                     : 'text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface'
                 }`}
               >
+                {currentPath === 'programs' && <motion.span layoutId="active-navigation-tab" className="pointer-events-none absolute inset-0 -z-10 rounded-lg bg-surface-container-high" transition={{ type: 'spring', stiffness: 380, damping: 30 }} />}
                 <BookOpen size={19} className={`shrink-0 overflow-hidden transition-all duration-300 ${isCompact ? 'max-w-6 opacity-100' : 'max-w-0 opacity-0'}`} />
                 <span className={`overflow-hidden whitespace-nowrap transition-all duration-300 ${isCompact ? 'max-w-0 opacity-0' : 'max-w-20 opacity-100'}`}>Programs</span>
               </button>
@@ -281,12 +286,13 @@ export const Header: React.FC<HeaderProps> = ({
               onClick={() => handleNavClick('projects')}
               aria-label="Projects"
               title="Projects"
-              className={`flex items-center gap-1 px-3 py-2 rounded-lg transition-colors cursor-pointer ${
+              className={`relative isolate flex items-center gap-1 px-3 py-2 rounded-lg transition-colors cursor-pointer ${
                 currentPath === 'projects'
-                  ? 'bg-surface-container-high text-secondary font-bold'
+                  ? 'text-secondary font-bold'
                   : 'text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface'
               }`}
             >
+              {currentPath === 'projects' && <motion.span layoutId="active-navigation-tab" className="pointer-events-none absolute inset-0 -z-10 rounded-lg bg-surface-container-high" transition={{ type: 'spring', stiffness: 380, damping: 30 }} />}
               <Rocket size={19} className={`shrink-0 overflow-hidden transition-all duration-300 ${isCompact ? 'max-w-6 opacity-100' : 'max-w-0 opacity-0'}`} />
               <span className={`overflow-hidden whitespace-nowrap transition-all duration-300 ${isCompact ? 'max-w-0 opacity-0' : 'max-w-20 opacity-100'}`}>Projects</span>
             </button>
@@ -296,12 +302,13 @@ export const Header: React.FC<HeaderProps> = ({
               onClick={() => handleNavClick('about-us')}
               aria-label="About Us"
               title="About Us"
-              className={`flex items-center gap-1 px-3 py-2 rounded-lg transition-colors cursor-pointer ${
+              className={`relative isolate flex items-center gap-1 px-3 py-2 rounded-lg transition-colors cursor-pointer ${
                 currentPath === 'about-us'
-                  ? 'bg-surface-container-high text-secondary font-bold'
+                  ? 'text-secondary font-bold'
                   : 'text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface'
               }`}
             >
+              {currentPath === 'about-us' && <motion.span layoutId="active-navigation-tab" className="pointer-events-none absolute inset-0 -z-10 rounded-lg bg-surface-container-high" transition={{ type: 'spring', stiffness: 380, damping: 30 }} />}
               <Users size={19} className={`shrink-0 overflow-hidden transition-all duration-300 ${isCompact ? 'max-w-6 opacity-100' : 'max-w-0 opacity-0'}`} />
               <span className={`overflow-hidden whitespace-nowrap transition-all duration-300 ${isCompact ? 'max-w-0 opacity-0' : 'max-w-20 opacity-100'}`}>About Us</span>
             </button>
@@ -311,12 +318,13 @@ export const Header: React.FC<HeaderProps> = ({
               onClick={() => handleNavClick('resources')}
               aria-label="Resources"
               title="Resources"
-              className={`flex items-center gap-1 px-3 py-2 rounded-lg transition-colors cursor-pointer ${
+              className={`relative isolate flex items-center gap-1 px-3 py-2 rounded-lg transition-colors cursor-pointer ${
                 currentPath === 'resources'
-                  ? 'bg-surface-container-high text-secondary font-bold'
+                  ? 'text-secondary font-bold'
                   : 'text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface'
               }`}
             >
+              {currentPath === 'resources' && <motion.span layoutId="active-navigation-tab" className="pointer-events-none absolute inset-0 -z-10 rounded-lg bg-surface-container-high" transition={{ type: 'spring', stiffness: 380, damping: 30 }} />}
               <FolderOpen size={19} className={`shrink-0 overflow-hidden transition-all duration-300 ${isCompact ? 'max-w-6 opacity-100' : 'max-w-0 opacity-0'}`} />
               <span className={`overflow-hidden whitespace-nowrap transition-all duration-300 ${isCompact ? 'max-w-0 opacity-0' : 'max-w-20 opacity-100'}`}>Resources</span>
             </button>
