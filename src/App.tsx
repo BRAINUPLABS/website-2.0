@@ -9,6 +9,7 @@ import { BookDemoPage } from './pages/BookDemoPage.tsx';
 import { ProjectsPage } from './pages/ProjectsPage.tsx';
 import { AboutPage } from './pages/AboutPage.tsx';
 import { ResourcesPage } from './pages/ResourcesPage.tsx';
+import { InternshipPage } from './pages/InternshipPage.tsx';
 import { NavigationPath, StemKit } from './types.ts';
 import { STEM_KITS_DATA } from './data/kits.ts';
 
@@ -152,6 +153,10 @@ export default function App() {
 
         {currentPath === 'resources' && (
           <ResourcesPage onNavigate={handleNavigate} />
+        )}
+
+        {currentPath === 'internship' && (
+          <InternshipPage onNavigate={handleNavigate} />
         )}
       </main>
 

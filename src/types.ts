@@ -7,6 +7,7 @@ export type NavigationPath =
   | 'projects'
   | 'about-us'
   | 'resources'
+  | 'internship'
   | 'book-a-demo';
 
 export interface StemKit {
