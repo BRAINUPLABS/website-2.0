@@ -11,7 +11,6 @@ import { AboutPage } from './pages/AboutPage.tsx';
 import { ResourcesPage } from './pages/ResourcesPage.tsx';
 import { InternshipPage } from './pages/InternshipPage.tsx';
 import { NavigationPath, StemKit } from './types.ts';
-import { STEM_KITS_DATA } from './data/kits.ts';
 
 interface QuoteCartItem {
   id: string;
@@ -20,37 +19,69 @@ interface QuoteCartItem {
   quantity: number;
 }
 
+interface RouteState {
+  path: NavigationPath;
+  subTab?: string;
+}
+
+const routePaths: Record<NavigationPath, string> = {
+  home: '/',
+  'for-schools': '/for-schools',
+  'lab-setup': '/lab-setup',
+  'stem-kits': '/stem-kits',
+  programs: '/programs',
+  projects: '/projects',
+  'about-us': '/about-us',
+  resources: '/resources',
+  internship: '/internship',
+  'book-a-demo': '/book-a-demo',
+};
+
+const readRoute = (): RouteState => {
+  const path = (Object.entries(routePaths).find(([, url]) => url === window.location.pathname)?.[0] as NavigationPath | undefined) ?? 'home';
+  if (path === 'lab-setup') return { path: 'for-schools', subTab: 'tier2' };
+
+  const subTab = new URLSearchParams(window.location.search).get('tab') || undefined;
+  return { path, subTab };
+};
+
+const routeUrl = (path: NavigationPath, subTab?: string) => {
+  const query = subTab ? `?tab=${encodeURIComponent(subTab)}` : '';
+  return `${routePaths[path]}${query}`;
+};
+
 export default function App() {
-  const [currentPath, setCurrentPath] = useState<NavigationPath>('home');
-  const [activeSubTab, setActiveSubTab] = useState<string | undefined>(undefined);
+  const [currentPath, setCurrentPath] = useState<NavigationPath>(() => readRoute().path);
+  const [activeSubTab, setActiveSubTab] = useState<string | undefined>(() => readRoute().subTab);
   const [quoteCart, setQuoteCart] = useState<QuoteCartItem[]>([]);
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
   const [comparedKits, setComparedKits] = useState<StemKit[]>([]);
   const [quoteSuccessMsg, setQuoteSuccessMsg] = useState(false);
 
-  // Scroll to top whenever currentPath changes
+  // Scroll to top whenever the route changes.
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [currentPath]);
+  }, [currentPath, activeSubTab]);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      const route = readRoute();
+      setCurrentPath(route.path);
+      setActiveSubTab(route.subTab);
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
   const handleNavigate = (path: NavigationPath, subTab?: string) => {
-    // If navigating to 'lab-setup', map to 'for-schools' with appropriate subtab
-    if (path === 'lab-setup') {
-      setCurrentPath('for-schools');
-      setActiveSubTab('tier2');
-      return;
-    }
-    setCurrentPath(path);
-    setActiveSubTab(subTab);
-  };
+    const route: RouteState = path === 'lab-setup'
+      ? { path: 'for-schools', subTab: 'tier2' }
+      : { path, subTab };
 
-  const handleSelectKit = (kitName: string) => {
-    setCurrentPath('stem-kits');
-    // Match domain if applicable
-    const matched = STEM_KITS_DATA.find((k) => k.name.toLowerCase().includes(kitName.toLowerCase()));
-    if (matched) {
-      setActiveSubTab(matched.domain);
-    }
+    window.history.pushState(route, '', routeUrl(route.path, route.subTab));
+    setCurrentPath(route.path);
+    setActiveSubTab(route.subTab);
   };
 
   // Quote cart actions
