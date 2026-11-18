@@ -4,9 +4,10 @@ import { FAQS_DATA } from '../../data/faqs.ts';
 interface FAQSectionProps {
   openFaqIndex: number | null;
   onToggle: (index: number) => void;
+  limit?: number;
 }
 
-export function FAQSection({ openFaqIndex, onToggle }: FAQSectionProps) {
+export function FAQSection({ openFaqIndex, onToggle, limit }: FAQSectionProps) {
   return (
     <section className="w-full py-20 bg-surface-container-low border-t border-surface-container">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 flex flex-col gap-10">
@@ -17,7 +18,7 @@ export function FAQSection({ openFaqIndex, onToggle }: FAQSectionProps) {
         </div>
 
         <div className="flex flex-col gap-3">
-          {FAQS_DATA.map((faq, idx) => {
+          {FAQS_DATA.slice(0, limit).map((faq, idx) => {
             const isOpen = openFaqIndex === idx;
             return (
               <div
