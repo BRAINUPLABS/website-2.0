@@ -116,7 +116,7 @@ export default function App() {
       {/* Main Page Body (offset for fixed header) */}
       <main className="flex-1 w-full pt-28">
         {currentPath === 'home' && (
-          <HomePage onNavigate={handleNavigate} onSelectKit={handleSelectKit} />
+          <HomePage onNavigate={handleNavigate} />
         )}
 
         {currentPath === 'for-schools' && (
