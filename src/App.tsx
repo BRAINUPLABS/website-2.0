@@ -152,7 +152,7 @@ export default function App() {
         )}
 
         {currentPath === 'for-schools' && (
-          <ForSchoolsPage onNavigate={handleNavigate} initialTab={activeSubTab} />
+          <ForSchoolsPage initialTab={activeSubTab} />
         )}
 
         {currentPath === 'stem-kits' && (
