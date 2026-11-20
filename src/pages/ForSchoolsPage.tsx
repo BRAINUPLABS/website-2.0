@@ -71,6 +71,8 @@ export const ForSchoolsPage: React.FC<ForSchoolsPageProps> = ({ initialTab }) =>
     document.getElementById('proposal-form')?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const scrollToProposal = () => document.getElementById('proposal-form')?.scrollIntoView({ behavior: 'smooth' });
+
   const requestProposal = (event: React.FormEvent) => {
     event.preventDefault();
     setFormMessage('This form cannot send yet because an enquiry service has not been connected. Please contact schools@brainuplabs.com to request a proposal.');
@@ -83,7 +85,7 @@ export const ForSchoolsPage: React.FC<ForSchoolsPageProps> = ({ initialTab }) =>
           <div>
             <h1 className="font-display text-4xl font-extrabold tracking-tight text-on-surface sm:text-5xl">Bring hands-on STEM learning to your school.</h1>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-on-surface-variant">We help you set up your lab, introduce project-based learning, and train your teachers.</p>
-            <a href="#proposal-form" className="mt-7 inline-flex rounded-xl bg-primary px-6 py-3.5 font-display text-sm font-bold text-on-primary shadow-md transition-colors hover:bg-primary-container focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary">Request a Proposal</a>
+            <button onClick={scrollToProposal} className="mt-7 inline-flex rounded-xl bg-primary px-6 py-3.5 font-display text-sm font-bold text-on-primary shadow-md transition-colors hover:bg-primary-container focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary">Request a Proposal</button>
           </div>
           <img src="/assets/aistudio/Image_1_360de192.jpeg" alt="Students building a robot in a school STEM lab" className="h-72 w-full rounded-2xl object-cover shadow-lg sm:h-96" />
         </div>
@@ -115,7 +117,7 @@ export const ForSchoolsPage: React.FC<ForSchoolsPageProps> = ({ initialTab }) =>
               </article>
             ))}
           </div>
-          <button onClick={() => { setLabPreference('Help me choose'); document.getElementById('proposal-form')?.scrollIntoView({ behavior: 'smooth' }); }} className="mt-8 inline-flex font-display text-sm font-bold text-secondary hover:text-secondary-container focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary">Help me choose <span aria-hidden="true" className="ml-1">→</span></button>
+          <button onClick={() => { setLabPreference('Help me choose'); scrollToProposal(); }} className="mt-8 inline-flex font-display text-sm font-bold text-secondary hover:text-secondary-container focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary">Help me choose <span aria-hidden="true" className="ml-1">→</span></button>
         </div>
       </section>
 
