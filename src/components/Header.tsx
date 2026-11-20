@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { CalendarDays, GraduationCap, Menu, Package, ReceiptText, Rocket, School, X } from 'lucide-react';
+import { CalendarDays, GraduationCap, Home, Menu, Package, ReceiptText, Rocket, School, X } from 'lucide-react';
 import { motion } from 'motion/react';
 import { NavigationPath } from '../types.ts';
 
@@ -11,6 +11,7 @@ interface HeaderProps {
 }
 
 const navigation = [
+  { label: 'Home', path: 'home', icon: Home },
   { label: 'For Schools', path: 'for-schools', icon: School },
   { label: 'STEM Kits', path: 'stem-kits', icon: Package },
   { label: 'Student Projects', path: 'projects', icon: Rocket },
@@ -43,7 +44,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate, quoteIt
         <nav aria-label="Main navigation" className="hidden items-center gap-1 lg:flex">
           {navigation.map((item) => {
             const Icon = item.icon;
-            return <button key={item.path} onClick={() => navigate(item.path)} aria-label={item.label} title={item.label} className={`relative isolate flex items-center rounded-lg font-display text-sm font-semibold transition-all duration-300 ${isCompact ? 'h-9 w-9 justify-center p-0' : 'gap-2 px-3 py-2'} ${currentPath === item.path ? 'text-secondary' : 'text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface'}`}>
+            return <button key={item.path} onClick={() => navigate(item.path)} aria-label={item.label} title={item.label} className={`relative isolate flex items-center rounded-lg font-display text-sm font-semibold transition-all duration-300 ${isCompact ? 'h-9 w-9 justify-center p-0' : 'gap-0 px-3 py-2'} ${currentPath === item.path ? 'text-secondary' : 'text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface'}`}>
               {currentPath === item.path && <motion.span layoutId="active-navigation-tab" className="pointer-events-none absolute inset-0 -z-10 rounded-lg bg-surface-container-high" transition={{ type: 'spring', stiffness: 380, damping: 30 }} />}
               <Icon size={18} className={`shrink-0 transition-all duration-300 ${isCompact ? 'max-w-5 opacity-100' : 'max-w-0 opacity-0'}`} />
               <span className={`overflow-hidden whitespace-nowrap transition-all duration-300 ${isCompact ? 'max-w-0 opacity-0' : 'max-w-32 opacity-100'}`}>{item.label}</span>
