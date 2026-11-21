@@ -160,7 +160,7 @@ export const ForSchoolsPage: React.FC<ForSchoolsPageProps> = ({ initialTab }) =>
               <Field id="lab-preference" label="Lab preference"><select id="lab-preference" name="labPreference" value={labPreference} onChange={(event) => setLabPreference(event.target.value)} className={inputClass}><option>Help me choose</option>{setups.map((setup) => <option key={setup.name}>{setup.name}</option>)}</select></Field>
               <Field id="requirements" label="Requirements (optional)"><textarea id="requirements" name="requirements" rows={4} className={inputClass} placeholder="Tell us about your space or teaching goals." /></Field>
               <p className="text-sm text-on-surface-variant">We will discuss board, student strength, and detailed procurement needs during follow-up.</p>
-              {formMessage && <p role="status" className="rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900">{formMessage}</p>}
+              {formMessage && <p role="status" className="rounded-xl border border-warning bg-warning-container p-4 text-sm text-on-warning">{formMessage}</p>}
               <button type="submit" className="inline-flex rounded-xl bg-primary px-6 py-3.5 font-display text-sm font-bold text-on-primary shadow-md transition-colors hover:bg-primary-container focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary">Request a Proposal</button>
             </form>
           </div>

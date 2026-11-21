@@ -40,11 +40,11 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
               <p className="text-xs text-on-surface-variant font-bold mt-1">Classroom Units Deployed</p>
             </div>
             <div className="p-4 rounded-2xl bg-surface-container-lowest shadow-sm border border-surface-container">
-              <span className="font-display text-3xl sm:text-4xl font-extrabold text-emerald-600">12,000+</span>
+              <span className="font-display text-3xl sm:text-4xl font-extrabold text-success">12,000+</span>
               <p className="text-xs text-on-surface-variant font-bold mt-1">Certified Educators</p>
             </div>
             <div className="p-4 rounded-2xl bg-surface-container-lowest shadow-sm border border-surface-container">
-              <span className="font-display text-3xl sm:text-4xl font-extrabold text-amber-600">14</span>
+              <span className="font-display text-3xl sm:text-4xl font-extrabold text-warning">14</span>
               <p className="text-xs text-on-surface-variant font-bold mt-1">National Olympiad Podiums</p>
             </div>
           </div>

@@ -105,7 +105,7 @@ export const ProgramsPage: React.FC<ProgramsPageProps> = ({ onNavigate, initialF
       title: 'Master Educator STEM Certification (CPD)',
       category: 'teacher-dev',
       badge: 'Educator Professional Development',
-      badgeColor: 'bg-amber-100 text-amber-900',
+      badgeColor: 'bg-warning-container text-on-warning',
       icon: 'workspace_premium',
       description:
         'Certified continuous professional development for science, math, and computer science teachers. Upgrades classroom faculties into confident mentors in block coding, Python, and robotics.',
@@ -123,7 +123,7 @@ export const ProgramsPage: React.FC<ProgramsPageProps> = ({ onNavigate, initialF
       title: 'National STEM League & Competition Arenas',
       category: 'arenas-camps',
       badge: 'Competitive Mentorship',
-      badgeColor: 'bg-rose-100 text-rose-900',
+      badgeColor: 'bg-error-container text-on-error-container',
       icon: 'emoji_events',
       description:
         'Dedicated training arena and battle fields for high-stakes robotics competitions including WRO (World Robot Olympiad), RoboCup Junior, and national Atal Tinkering challenges.',
@@ -203,7 +203,7 @@ export const ProgramsPage: React.FC<ProgramsPageProps> = ({ onNavigate, initialF
                   <span className="text-xs text-on-surface-variant">Progressive Modules</span>
                 </div>
                 <div className="p-3.5 rounded-xl bg-surface-container-low flex flex-col border border-surface-container">
-                  <span className="font-display text-xl font-bold text-emerald-600">100% Lab Ready</span>
+                  <span className="font-display text-xl font-bold text-success">100% Lab Ready</span>
                   <span className="text-xs text-on-surface-variant">Zero Civil Redesign</span>
                 </div>
                 <div className="p-3.5 rounded-xl bg-surface-container-low flex flex-col border border-surface-container">
@@ -456,7 +456,7 @@ export const ProgramsPage: React.FC<ProgramsPageProps> = ({ onNavigate, initialF
           <div className="bg-surface-container-lowest rounded-3xl p-8 sm:p-12 shadow-md border border-surface-container">
             {prospectusSubmitted ? (
               <div className="text-center py-6 space-y-4">
-                <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
+                <div className="w-16 h-16 rounded-full bg-success-container text-success flex items-center justify-center mx-auto">
                   <span className="material-symbols-outlined text-4xl">check_circle</span>
                 </div>
                 <h3 className="font-display text-2xl font-bold text-on-surface">

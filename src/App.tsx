@@ -24,6 +24,19 @@ interface RouteState {
   subTab?: string;
 }
 
+type Theme = 'light' | 'dark';
+
+const initialTheme = (): Theme => document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+
+const hasSavedTheme = () => {
+  try {
+    const theme = localStorage.getItem('brain-up-theme');
+    return theme === 'light' || theme === 'dark';
+  } catch {
+    return false;
+  }
+};
+
 const routePaths: Record<NavigationPath, string> = {
   home: '/',
   'for-schools': '/for-schools',
@@ -51,6 +64,7 @@ const routeUrl = (path: NavigationPath, subTab?: string) => {
 };
 
 export default function App() {
+  const [theme, setTheme] = useState<Theme>(initialTheme);
   const [currentPath, setCurrentPath] = useState<NavigationPath>(() => readRoute().path);
   const [activeSubTab, setActiveSubTab] = useState<string | undefined>(() => readRoute().subTab);
   const [quoteCart, setQuoteCart] = useState<QuoteCartItem[]>([]);
@@ -73,6 +87,31 @@ export default function App() {
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
+
+  useEffect(() => {
+    if (hasSavedTheme()) return;
+
+    const media = window.matchMedia('(prefers-color-scheme: dark)');
+    const updateTheme = (event: MediaQueryListEvent) => {
+      const nextTheme: Theme = event.matches ? 'dark' : 'light';
+      document.documentElement.dataset.theme = nextTheme;
+      setTheme(nextTheme);
+    };
+
+    media.addEventListener('change', updateTheme);
+    return () => media.removeEventListener('change', updateTheme);
+  }, []);
+
+  const toggleTheme = () => {
+    const nextTheme: Theme = theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = nextTheme;
+    setTheme(nextTheme);
+    try {
+      localStorage.setItem('brain-up-theme', nextTheme);
+    } catch {
+      // Theme still works for this visit when storage is unavailable.
+    }
+  };
 
   const handleNavigate = (path: NavigationPath, subTab?: string) => {
     const route: RouteState = path === 'lab-setup'
@@ -143,6 +182,8 @@ export default function App() {
         onNavigate={handleNavigate}
         quoteItemsCount={totalQuoteCount}
         onOpenQuote={() => setIsQuoteModalOpen(true)}
+        theme={theme}
+        onToggleTheme={toggleTheme}
       />
 
       {/* Main Page Body (offset for fixed header) */}
@@ -225,7 +266,7 @@ export default function App() {
 
             {quoteSuccessMsg ? (
               <div className="text-center py-8 space-y-4">
-                <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
+                <div className="w-16 h-16 rounded-full bg-success-container text-success flex items-center justify-center mx-auto">
                   <span className="material-symbols-outlined text-4xl">check_circle</span>
                 </div>
                 <h3 className="font-display text-2xl font-bold text-on-surface">

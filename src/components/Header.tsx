@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { CalendarDays, GraduationCap, Home, Info, Menu, ReceiptText, Rocket, School, X } from 'lucide-react';
+import { CalendarDays, GraduationCap, Home, Info, Menu, Moon, ReceiptText, Rocket, School, Sun, X } from 'lucide-react';
 import { motion } from 'motion/react';
 import { NavigationPath } from '../types.ts';
 
@@ -8,6 +8,8 @@ interface HeaderProps {
   onNavigate: (path: NavigationPath, subTab?: string) => void;
   quoteItemsCount?: number;
   onOpenQuote?: () => void;
+  theme: 'light' | 'dark';
+  onToggleTheme: () => void;
 }
 
 const navigation = [
@@ -18,7 +20,7 @@ const navigation = [
   { label: 'About Us', path: 'about-us', icon: Info },
 ] as const;
 
-export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate, quoteItemsCount = 0, onOpenQuote }) => {
+export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate, quoteItemsCount = 0, onOpenQuote, theme, onToggleTheme }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isCompact, setIsCompact] = useState(false);
 
@@ -35,7 +37,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate, quoteIt
   };
 
   return (
-    <header className="fixed top-0 z-50 w-full border-b border-surface-container bg-surface-container-lowest/95 shadow-[0_1px_8px_rgba(19,27,46,0.06)] backdrop-blur-xl">
+    <header className="fixed top-0 z-50 w-full border-b border-surface-container bg-surface-container-lowest/95 shadow-sm backdrop-blur-xl">
       <div className={`mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 transition-all duration-300 sm:px-6 ${isCompact ? 'h-14' : 'h-20'}`}>
         <button onClick={() => navigate('home')} className="flex shrink-0 items-center gap-2.5 text-left">
           <img src="/assets/Photos/Logo.jpeg" alt="Brain Up Labs" className={`rounded-lg border border-surface-container-high object-contain shadow-sm transition-all duration-300 ${isCompact ? 'h-9 w-9' : 'h-11 w-11'}`} />
@@ -54,6 +56,9 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate, quoteIt
         <div className="flex shrink-0 items-center gap-2 sm:gap-3">
           {quoteItemsCount > 0 && <button onClick={onOpenQuote} className="hidden items-center gap-1.5 rounded-full bg-secondary-fixed px-3 py-1.5 text-xs font-bold text-on-secondary-fixed sm:flex" aria-label={`Open quote with ${quoteItemsCount} items`}><ReceiptText size={16} />{quoteItemsCount} in Quote</button>}
           <button onClick={() => navigate('book-a-demo')} aria-label="Book a Demo" title="Book a Demo" className={`inline-flex items-center justify-center rounded-full bg-secondary font-display text-sm font-bold text-on-secondary shadow-sm transition-all duration-300 hover:bg-secondary-container ${isCompact ? 'h-9 w-9 p-0' : 'gap-2 px-4 py-2.5 sm:px-5'}`}><CalendarDays size={18} className="shrink-0" /><span className={`overflow-hidden whitespace-nowrap transition-all duration-300 ${isCompact ? 'max-w-0 opacity-0' : 'max-w-28 opacity-100'}`}>Book a Demo</span></button>
+          <button onClick={onToggleTheme} aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`} title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`} className="inline-flex h-9 w-9 items-center justify-center rounded-full text-on-surface transition-colors hover:bg-surface-container-low">
+            {theme === 'dark' ? <Sun size={18} aria-hidden="true" /> : <Moon size={18} aria-hidden="true" />}
+          </button>
           <button onClick={() => setMobileMenuOpen((open) => !open)} className="rounded-lg p-2 text-on-surface hover:bg-surface-container-low lg:hidden" aria-label="Toggle navigation menu" aria-expanded={mobileMenuOpen}>{mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}</button>
         </div>
       </div>
