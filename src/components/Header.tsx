@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { CalendarDays, GraduationCap, Home, Menu, ReceiptText, Rocket, School, X } from 'lucide-react';
+import { CalendarDays, GraduationCap, Home, Info, Menu, ReceiptText, Rocket, School, X } from 'lucide-react';
 import { motion } from 'motion/react';
 import { NavigationPath } from '../types.ts';
 
@@ -15,6 +15,7 @@ const navigation = [
   { label: 'For Schools', path: 'for-schools', icon: School },
   { label: 'Student Projects', path: 'projects', icon: Rocket },
   { label: 'Internship', path: 'internship', icon: GraduationCap },
+  { label: 'About Us', path: 'about-us', icon: Info },
 ] as const;
 
 export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate, quoteItemsCount = 0, onOpenQuote }) => {
