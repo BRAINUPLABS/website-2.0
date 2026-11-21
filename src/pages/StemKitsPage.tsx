@@ -161,7 +161,7 @@ export const StemKitsPage: React.FC<StemKitsPageProps> = ({
             </div>
             <div className="h-8 w-px bg-outline-variant"></div>
             <div className="flex flex-col">
-              <span className="font-display text-2xl font-bold text-emerald-600">K-12</span>
+              <span className="font-display text-2xl font-bold text-success">K-12</span>
               <span className="text-xs text-on-surface-variant">Pedagogic Pathway</span>
             </div>
           </div>
@@ -374,7 +374,7 @@ export const StemKitsPage: React.FC<StemKitsPageProps> = ({
                 lab kits tailored for school environments
               </p>
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span className="w-2 h-2 rounded-full bg-success animate-pulse"></span>
                 <span className="font-display text-xs font-semibold text-on-surface-variant">
                   In Stock for Batch Dispatch
                 </span>
@@ -517,7 +517,7 @@ export const StemKitsPage: React.FC<StemKitsPageProps> = ({
                               {kit.categoryLabel}
                             </span>
                             <div className="flex items-center gap-1 text-xs text-on-surface">
-                              <span className="material-symbols-outlined text-[16px] text-amber-500 fill-1">
+                              <span className="material-symbols-outlined text-[16px] text-warning fill-1">
                                 star
                               </span>
                               <span className="font-bold">{kit.rating}</span>
@@ -682,7 +682,7 @@ export const StemKitsPage: React.FC<StemKitsPageProps> = ({
 
       {/* Sticky Comparison Drawer (Slides up when 1+ kits selected) */}
       {comparedKits.length > 0 && (
-        <aside className="fixed bottom-0 inset-x-0 bg-surface-container-lowest shadow-[0_-8px_30px_rgba(19,27,46,0.2)] z-40 border-t border-surface-container transition-transform duration-300">
+        <aside className="fixed bottom-0 inset-x-0 bg-surface-container-lowest shadow-2xl z-40 border-t border-surface-container transition-transform duration-300">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3">
             {/* Drawer Header Bar */}
             <div className="flex items-center justify-between border-b border-surface-container-low pb-2">
@@ -806,7 +806,7 @@ export const StemKitsPage: React.FC<StemKitsPageProps> = ({
 
             {rfqSubmitted ? (
               <div className="text-center py-8 space-y-4">
-                <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
+                <div className="w-16 h-16 rounded-full bg-success-container text-success flex items-center justify-center mx-auto">
                   <span className="material-symbols-outlined text-4xl">task_alt</span>
                 </div>
                 <h3 className="font-display text-2xl font-bold text-on-surface">

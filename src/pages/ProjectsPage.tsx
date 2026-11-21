@@ -110,7 +110,7 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({ onNavigate, initialC
               <div className="px-6 pb-6 pt-2 space-y-3">
                 <div className="p-3 rounded-xl bg-surface-container-low text-xs space-y-1 border border-surface-container">
                   <div className="flex items-center gap-1.5 text-on-surface font-semibold">
-                    <span className="material-symbols-outlined text-[16px] text-amber-500">emoji_events</span>
+                    <span className="material-symbols-outlined text-[16px] text-warning">emoji_events</span>
                     <span className="truncate">{proj.recognition}</span>
                   </div>
                   <div className="flex items-center gap-1.5 text-on-surface-variant font-mono text-[11px]">
@@ -172,7 +172,7 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({ onNavigate, initialC
                 <div>
                   <span className="text-on-surface-variant block font-medium">National Recognition:</span>
                   <strong className="text-on-surface text-sm flex items-center gap-1.5 mt-0.5">
-                    <span className="material-symbols-outlined text-amber-500 text-[18px]">emoji_events</span>
+                    <span className="material-symbols-outlined text-warning text-[18px]">emoji_events</span>
                     {selectedProject.recognition}
                   </strong>
                 </div>
