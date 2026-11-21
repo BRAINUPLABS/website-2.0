@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { CalendarDays, GraduationCap, Home, Menu, Package, ReceiptText, Rocket, School, X } from 'lucide-react';
+import { CalendarDays, GraduationCap, Home, Menu, ReceiptText, Rocket, School, X } from 'lucide-react';
 import { motion } from 'motion/react';
 import { NavigationPath } from '../types.ts';
 
@@ -13,7 +13,6 @@ interface HeaderProps {
 const navigation = [
   { label: 'Home', path: 'home', icon: Home },
   { label: 'For Schools', path: 'for-schools', icon: School },
-  { label: 'STEM Kits', path: 'stem-kits', icon: Package },
   { label: 'Student Projects', path: 'projects', icon: Rocket },
   { label: 'Internship', path: 'internship', icon: GraduationCap },
 ] as const;

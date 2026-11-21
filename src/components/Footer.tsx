@@ -18,7 +18,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => (
         ['Programs & curriculum', 'programs'],
       ]} onNavigate={onNavigate} />
       <FooterLinks title="Explore" links={[
-        ['STEM Kits', 'stem-kits'],
         ['Student Projects', 'projects'],
         ['Internship', 'internship'],
         ['Book a Demo', 'book-a-demo'],

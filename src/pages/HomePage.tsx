@@ -10,7 +10,6 @@ interface HomePageProps {
 
 const schoolGets = [
   { title: 'Modular lab setup', description: 'Choose a dedicated lab or flexible classroom stations that fit your school.', icon: 'engineering', path: 'for-schools' as const, subTab: 'lab-tiers' },
-  { title: 'Grade-level STEM kits', description: 'Hands-on kits that give students a clear progression from first builds to advanced projects.', icon: 'inventory_2', path: 'stem-kits' as const, subTab: 'grade' },
   { title: 'Teacher training', description: 'Practical guidance so teachers can run engaging lab sessions with confidence.', icon: 'school', path: 'for-schools' as const, subTab: 'teacher-training' },
 ];
 
@@ -65,7 +64,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             <p className="font-display text-xs font-bold uppercase tracking-widest text-secondary">What your school gets</p>
             <h2 className="mt-2 font-display text-3xl font-extrabold tracking-tight text-on-surface sm:text-4xl">Everything needed to start building.</h2>
           </div>
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
+          <div className="mt-10 grid gap-5 md:grid-cols-2">
             {schoolGets.map((item) => (
               <button key={item.title} onClick={() => onNavigate(item.path, item.subTab)} className="group flex min-h-60 flex-col items-start rounded-2xl border border-surface-container bg-surface-container-lowest p-6 text-left shadow-sm transition-all hover:-translate-y-1 hover:border-secondary/30 hover:shadow-md">
                 <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-secondary-fixed text-on-secondary-fixed"><span className="material-symbols-outlined text-[22px]">{item.icon}</span></span>
