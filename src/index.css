@@ -120,7 +120,7 @@ html[data-theme='dark'] {
   --color-warning: #fcd34d;
   --color-on-warning: #422006;
   --color-warning-container: #423512;
-  --color-home-cta-background: color-mix(in oklab, var(--color-primary-container) 90%, transparent);
+  --color-home-cta-background: hsl(171, 50%, 48%);
   --color-home-cta-heading: var(--color-on-primary-container);
   --color-home-cta-copy: color-mix(in oklab, var(--color-on-primary-container) 80%, transparent);
 }
