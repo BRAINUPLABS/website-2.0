@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { ArrowRight, BookOpen, GraduationCap, Table2, Wrench } from 'lucide-react';
+import { STEM_KITS_DATA } from '../data/kits.ts';
 import { STUDENT_PROJECTS_DATA } from '../data/projects.ts';
 import { NavigationPath } from '../types.ts';
 import { FAQSection } from './HomePage/FAQSection.tsx';
@@ -8,9 +10,35 @@ interface HomePageProps {
   onNavigate: (path: NavigationPath, subTab?: string) => void;
 }
 
-const schoolGets = [
-  { title: 'Modular lab setup', description: 'Choose a dedicated lab or flexible classroom stations that fit your school.', icon: 'engineering', path: 'for-schools' as const, subTab: 'lab-tiers' },
-  { title: 'Teacher training', description: 'Practical guidance so teachers can run engaging lab sessions with confidence.', icon: 'school', path: 'for-schools' as const, subTab: 'teacher-training' },
+const schoolSolutions = [
+  { title: 'STEM & Robotics Labs', description: 'Complete lab setups designed for your school’s space.', icon: Wrench },
+  { title: 'Labs on Table™', description: 'Portable STEM stations that turn classroom desks into labs.', icon: Table2 },
+  { title: 'Learning Curriculum', description: 'Practical projects and guided lessons for grades 1–12.', icon: BookOpen },
+  { title: 'Teacher Training', description: 'Training and ongoing support to help teachers lead confidently.', icon: GraduationCap },
+];
+
+// Set this when the dedicated shop is ready. The action remains disabled until then.
+const STEM_KITS_SHOP_URL: string | null = null;
+
+const featuredStemKits = [
+  {
+    title: 'Early Explorers Discovery Kit',
+    grades: 'Grades 1–3',
+    description: 'Hands-on electronics and simple circuits for curious young learners.',
+    imageUrl: STEM_KITS_DATA[0].imageUrl,
+  },
+  {
+    title: 'Mechanical & Sensor Robotics',
+    grades: 'Grades 4–6',
+    description: 'Build robots and explore sensors, movement, and block coding.',
+    imageUrl: STEM_KITS_DATA[2].imageUrl,
+  },
+  {
+    title: 'IoT & Smart Environment Hub',
+    grades: 'Grades 7–9',
+    description: 'Explore connected devices, environmental monitoring, and automation.',
+    imageUrl: STEM_KITS_DATA[1].imageUrl,
+  },
 ];
 
 export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
@@ -58,21 +86,53 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      <section className="w-full border-y border-surface-container bg-surface-container-low py-16 sm:py-20">
+      <section className="w-full border-y border-surface-container bg-surface-container-low py-16 sm:py-20 lg:py-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+          <div className="max-w-3xl">
+            <h2 className="font-display text-3xl font-extrabold leading-tight tracking-tight text-on-surface sm:text-4xl lg:text-5xl">Everything your school needs to get started</h2>
+          </div>
+          <div className="mt-10 grid grid-cols-1 divide-y divide-surface-container md:grid-cols-2 md:divide-y-0 lg:grid-cols-4">
+            {schoolSolutions.map((item) => {
+              const Icon = item.icon;
+
+              return (
+                <article key={item.title} className="flex min-h-48 flex-col py-8 first:pt-0 last:pb-0 md:px-8 md:py-10 md:[&:nth-child(odd)]:border-r md:[&:nth-child(-n+2)]:border-b lg:min-h-56 lg:border-r lg:px-8 lg:py-0 lg:[&:nth-child(-n+2)]:border-b-0 lg:first:pl-0 lg:last:border-r-0 lg:last:pr-0">
+                  <Icon aria-hidden="true" className="h-5 w-5 text-secondary" strokeWidth={1.75} />
+                  <h3 className="mt-5 font-display text-lg font-bold leading-snug text-on-surface">{item.title}</h3>
+                  <p className="mt-3 max-w-xs text-sm leading-relaxed text-on-surface-variant">{item.description}</p>
+                </article>
+              );
+            })}
+          </div>
+          <a href="/for-schools" onClick={(event) => { event.preventDefault(); onNavigate('for-schools'); }} className="group mt-10 inline-flex items-center gap-2 font-display text-sm font-bold text-secondary underline-offset-4 transition-colors hover:text-primary hover:underline focus-visible:rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary">
+            Explore school solutions <ArrowRight aria-hidden="true" className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </a>
+        </div>
+      </section>
+
+      <section className="w-full bg-surface py-16 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="max-w-2xl">
-            <p className="font-display text-xs font-bold uppercase tracking-widest text-secondary">What your school gets</p>
-            <h2 className="mt-2 font-display text-3xl font-extrabold tracking-tight text-on-surface sm:text-4xl">Everything needed to start building.</h2>
+            <h2 className="font-display text-3xl font-extrabold leading-tight tracking-tight text-on-surface sm:text-4xl">STEM &amp; Robotics Kits</h2>
+            <p className="mt-4 text-base leading-relaxed text-on-surface-variant">Hands-on kits designed to grow with students as they explore, build, and invent.</p>
           </div>
-          <div className="mt-10 grid gap-5 md:grid-cols-2">
-            {schoolGets.map((item) => (
-              <button key={item.title} onClick={() => onNavigate(item.path, item.subTab)} className="group flex min-h-60 flex-col items-start rounded-2xl border border-surface-container bg-surface-container-lowest p-6 text-left shadow-sm transition-all hover:-translate-y-1 hover:border-secondary/30 hover:shadow-md">
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-secondary-fixed text-on-secondary-fixed"><span className="material-symbols-outlined text-[22px]">{item.icon}</span></span>
-                <h3 className="mt-5 font-display text-lg font-bold text-on-surface">{item.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-on-surface-variant">{item.description}</p>
-                <span className="mt-auto pt-5 text-sm font-bold text-secondary">Learn more <span aria-hidden="true">→</span></span>
-              </button>
+          <div className="mt-10 grid gap-5 lg:grid-cols-3 lg:gap-6">
+            {featuredStemKits.map((kit) => (
+              <article key={kit.title} className="overflow-hidden rounded-2xl border border-surface-container bg-surface-container-lowest">
+                <img src={kit.imageUrl} alt={kit.title} className="h-52 w-full object-cover sm:h-60" />
+                <div className="p-6 sm:p-7">
+                  <p className="font-display text-xs font-bold uppercase tracking-wider text-secondary">{kit.grades}</p>
+                  <h3 className="mt-3 font-display text-xl font-bold leading-snug text-on-surface">{kit.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-on-surface-variant">{kit.description}</p>
+                </div>
+              </article>
             ))}
+          </div>
+          <div className="mt-10 flex flex-col items-center gap-2">
+            <button type="button" disabled={!STEM_KITS_SHOP_URL} onClick={() => { if (STEM_KITS_SHOP_URL) window.location.assign(STEM_KITS_SHOP_URL); }} className="inline-flex items-center gap-2 rounded-xl border border-surface-container-high bg-surface-container-lowest px-5 py-3 font-display text-sm font-bold text-on-surface transition-colors enabled:hover:bg-surface-container-high disabled:cursor-not-allowed disabled:opacity-55">
+              Show more <ArrowRight aria-hidden="true" className="h-4 w-4" />
+            </button>
+            {!STEM_KITS_SHOP_URL && <p className="text-xs text-on-surface-variant">Shop coming soon</p>}
           </div>
         </div>
       </section>
