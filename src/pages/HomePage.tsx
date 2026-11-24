@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { ArrowRight, BookOpen, GraduationCap, Table2, Wrench } from 'lucide-react';
+import React, { useState } from 'react';
+import { ArrowRight, Blocks, BookOpen, Code2, GraduationCap, Presentation, Rocket, Table2, Wrench } from 'lucide-react';
 import { STEM_KITS_DATA } from '../data/kits.ts';
 import { STUDENT_PROJECTS_DATA } from '../data/projects.ts';
 import { NavigationPath } from '../types.ts';
@@ -15,6 +15,13 @@ const schoolSolutions = [
   { title: 'Labs on Table™', description: 'Portable STEM stations that turn classroom desks into labs.', icon: Table2 },
   { title: 'Learning Curriculum', description: 'Practical projects and guided lessons for grades 1–12.', icon: BookOpen },
   { title: 'Teacher Training', description: 'Training and ongoing support to help teachers lead confidently.', icon: GraduationCap },
+];
+
+const heroHighlights = [
+  { label: 'Modular lab setup', icon: Blocks },
+  { label: 'Teacher training', icon: Presentation },
+  { label: 'Hands-on projects', icon: Code2 },
+  { label: 'Future-ready skills', icon: Rocket },
 ];
 
 // Set this when the dedicated shop is ready. The action remains disabled until then.
@@ -43,46 +50,62 @@ const featuredStemKits = [
 
 export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
-  const [showRobotics, setShowRobotics] = useState(false);
   const project = STUDENT_PROJECTS_DATA[0];
-
-  useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    let interval: number;
-    const timeout = window.setTimeout(() => {
-      setShowRobotics(true);
-      interval = window.setInterval(() => setShowRobotics((current) => !current), 2850);
-    }, 2500);
-
-    return () => {
-      window.clearTimeout(timeout);
-      window.clearInterval(interval);
-    };
-  }, []);
 
   return (
     <div className="flex w-full flex-col">
-      <section className="w-full bg-surface py-12 sm:py-16 lg:py-20">
-        <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16">
-          <div className="flex flex-col items-start gap-6">
-            <p className="font-display text-xs font-bold uppercase tracking-widest text-secondary">For school leaders</p>
-            <h1 aria-label="Hands-on STEM and robotics labs for schools." className="max-w-xl font-display text-4xl font-extrabold leading-tight tracking-tight text-on-surface sm:text-5xl">
+      <section className="home-hero relative w-full overflow-hidden bg-surface py-12 sm:py-16 lg:py-20">
+        <span aria-hidden="true" className="hero-dot-mesh absolute right-8 top-8 hidden h-20 w-20 lg:block" />
+        <span aria-hidden="true" className="hero-dot-mesh absolute bottom-8 left-0 hidden h-14 w-14 lg:block" />
+        <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
+          <div className="flex flex-col items-start">
+            <p className="hero-accent-outline hero-accent-text inline-flex items-center gap-2 rounded-full border px-3 py-1.5 font-display text-xs font-bold uppercase tracking-widest">
+              <GraduationCap aria-hidden="true" className="h-4 w-4" /> For school leaders
+            </p>
+            <h1 aria-label="Hands-on STEM and robotics labs for schools." className="mt-6 max-w-2xl font-display text-4xl font-extrabold leading-[1.08] tracking-tight text-on-surface sm:text-5xl lg:text-[3.5rem]">
               <span aria-hidden="true" className="motion-reduce:hidden">Hands-on{' '}
-                <span className="relative inline-block h-[1.3em] min-w-[6em] overflow-hidden align-[-0.24em] whitespace-nowrap">
-                  <span className={`absolute left-0 top-0 font-mono text-[1.05em] text-secondary transition-transform duration-[350ms] ease-out ${showRobotics ? '-translate-y-full' : 'translate-y-0'}`}>STEM</span>
-                  <span className={`absolute left-0 top-0 font-mono text-[1.05em] text-secondary transition-transform duration-[350ms] ease-out ${showRobotics ? 'translate-y-0' : 'translate-y-full'}`}>Robotics</span>
-                </span>{' '}labs for schools.
+                <span className="relative inline-block h-[1.3em] w-[5.25em] overflow-hidden align-[-0.35em] whitespace-nowrap">
+                  <span className="hero-keyword-loop hero-accent-text absolute left-0 top-0 flex flex-col font-mono text-[1.05em]">
+                    <span className="h-[1.3em]">STEM</span>
+                    <span className="h-[1.3em]">Robotics</span>
+                    <span className="h-[1.3em]">AI</span>
+                    <span className="h-[1.3em]">STEM</span>
+                  </span>
+                </span>
+                <span className="block">labs for schools.</span>
+                <span aria-hidden="true" className="hero-heading-underline mt-2 block h-1 w-32 rounded-full" />
               </span>
               <span className="hidden motion-reduce:inline">Hands-on STEM and robotics labs for schools.</span>
             </h1>
-            <p className="max-w-xl text-lg leading-relaxed text-on-surface-variant">We set up modular labs, train teachers, and give students projects they can build in class.</p>
-            <button onClick={() => onNavigate('book-a-demo')} className="inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3.5 font-display text-sm font-bold text-on-primary shadow-md transition-all hover:bg-primary-container hover:shadow-lg">
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-on-surface-variant">We set up modular labs, train teachers, and give students projects they can build in class.</p>
+            <div className="mt-7 grid w-full grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-3">
+              {heroHighlights.map((highlight) => {
+                const Icon = highlight.icon;
+
+                return (
+                  <div key={highlight.label} className="flex min-h-24 flex-col items-center justify-center gap-2 rounded-xl border border-surface-container bg-surface-container-lowest px-2 py-3 text-center">
+                    <Icon aria-hidden="true" className="hero-accent-text h-5 w-5" strokeWidth={1.75} />
+                    <span className="font-display text-xs font-bold leading-tight text-on-surface">{highlight.label}</span>
+                  </div>
+                );
+              })}
+            </div>
+            <div className="mt-7 flex flex-wrap items-center gap-4">
+              <button onClick={() => onNavigate('book-a-demo')} className="hero-accent-bg inline-flex items-center gap-2 rounded-xl px-6 py-3.5 font-display text-sm font-bold shadow-md transition-all hover:shadow-lg">
               <span className="material-symbols-outlined text-[20px]">calendar_today</span>
               Book a Demo
-            </button>
+              </button>
+              <button onClick={() => onNavigate('projects')} className="hero-accent-hover inline-flex items-center gap-2 rounded-xl px-2 py-3 font-display text-sm font-bold text-on-surface transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary">
+                <span className="hero-accent-outline hero-accent-text flex h-8 w-8 items-center justify-center rounded-full border"><span aria-hidden="true" className="ml-0.5 text-xs">▶</span></span>
+                Watch how it works
+              </button>
+            </div>
           </div>
-          <img src="/assets/aistudio/Image_1_360de192.jpeg" alt="Students building a robot in a school STEM lab" className="h-72 w-full rounded-2xl object-cover shadow-lg sm:h-96" />
+          <div className="relative">
+            <span aria-hidden="true" className="hero-image-accent absolute -right-4 -top-5 h-24 w-36 rounded-3xl sm:-right-6 sm:-top-7 sm:h-32 sm:w-48" />
+            <span aria-hidden="true" className="absolute -bottom-5 -left-4 h-24 w-36 rounded-3xl bg-surface-container-high sm:-bottom-7 sm:-left-7 sm:h-36 sm:w-48" />
+            <img src="/assets/aistudio/Image_1_360de192.jpeg" alt="Students building a robot in a school STEM lab" className="relative aspect-[4/3] w-full rounded-3xl border border-surface-container object-cover shadow-lg" />
+          </div>
         </div>
       </section>
 
