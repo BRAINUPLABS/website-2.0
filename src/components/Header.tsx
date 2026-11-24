@@ -40,6 +40,8 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate, quoteIt
     <header className="fixed top-0 z-50 w-full border-b border-surface-container bg-surface-container-lowest/95 shadow-sm backdrop-blur-xl">
       <div className={`mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 transition-all duration-300 sm:px-6 ${isCompact ? 'h-14' : 'h-20'}`}>
         <button onClick={() => navigate('home')} className="flex shrink-0 items-center gap-2.5 text-left">
+          <img src="/assets/Photos/logo-mark-transparent.png" alt="Brain Up Labs" className={`object-contain transition-all duration-300 ${isCompact ? 'h-10 w-10' : 'h-12 w-12'}`} />
+          <span className={`hidden overflow-hidden whitespace-nowrap font-display text-xl font-extrabold tracking-tight text-on-surface transition-all duration-300 sm:block ${isCompact ? 'max-w-0 opacity-0' : 'max-w-48 opacity-100'}`}>Brain Up Labs</span>
           <img src="/assets/Photos/logo_1.png" alt="Brain Up Labs" className={`rounded-lg border border-surface-container-high object-contain shadow-sm transition-all duration-300 ${isCompact ? 'h-9 w-9' : 'h-11 w-11'}`} />
           <span className={`hidden overflow-hidden whitespace-nowrap transition-all duration-300 sm:block ${isCompact ? 'max-w-0 opacity-0' : 'max-w-48 opacity-100'}`}>
             <span className="flex flex-col leading-none">
