@@ -147,7 +147,7 @@ export const ProgramsPage: React.FC<ProgramsPageProps> = ({ onNavigate, initialF
     <div className="flex flex-col w-full">
       {/* Toast */}
       {downloadToast && (
-        <div className="fixed top-24 right-6 z-50 bg-primary-container text-surface-bright px-5 py-3 rounded-xl shadow-2xl flex items-center gap-3 border border-secondary/30 animate-bounce">
+        <div className="fixed top-24 right-6 z-50 bg-primary-container text-on-primary-container px-5 py-3 rounded-xl shadow-2xl flex items-center gap-3 border border-secondary/30 animate-bounce">
           <span className="material-symbols-outlined text-tertiary-fixed text-[22px]">download_done</span>
           <span className="font-label-lg text-sm">
             2025–2026 Academic Prospectus downloaded & sent to {prospectusForm.email || 'your email'}!
