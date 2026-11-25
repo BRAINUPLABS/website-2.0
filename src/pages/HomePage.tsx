@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowRight, Blocks, BookOpen, Code2, GraduationCap, Presentation, Rocket, Table2, Wrench } from 'lucide-react';
+import { ArrowRight, Blocks, BookOpen, Code2, GraduationCap, Presentation, Rocket, School, Table2, Wrench } from 'lucide-react';
 import { STEM_KITS_DATA } from '../data/kits.ts';
 import { STUDENT_PROJECTS_DATA } from '../data/projects.ts';
 import { NavigationPath } from '../types.ts';
@@ -109,27 +109,42 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      <section className="w-full border-y border-surface-container bg-surface-container-low py-16 sm:py-20 lg:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="max-w-3xl">
-            <h2 className="font-display text-3xl font-extrabold leading-tight tracking-tight text-on-surface sm:text-4xl lg:text-5xl">Everything your school needs to get started</h2>
+      <section className="school-solutions relative w-full overflow-hidden border-y border-surface-container bg-surface-container-low py-16 sm:py-20 lg:py-24">
+        <span aria-hidden="true" className="school-solution-corner absolute -left-12 -top-12 hidden h-32 w-32 rounded-[2.5rem] lg:block" />
+        <span aria-hidden="true" className="school-solution-dot-mesh absolute bottom-10 left-6 hidden h-16 w-16 lg:block" />
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6">
+          <div className="mx-auto max-w-4xl text-center">
+            <p className="school-accent-outline school-accent-text inline-flex items-center gap-2 rounded-full border px-3 py-1.5 font-display text-xs font-bold uppercase tracking-widest">
+              <School aria-hidden="true" className="h-4 w-4" /> Complete school solutions
+            </p>
+            <h2 className="mt-5 font-display text-3xl font-extrabold leading-tight tracking-tight text-on-surface sm:text-4xl lg:text-5xl">Everything your school needs to <span className="school-accent-text">build future innovators.</span></h2>
+            <p className="mx-auto mt-5 max-w-3xl text-base leading-relaxed text-on-surface-variant sm:text-lg">From STEM labs and portable stations to practical curriculum and teacher training, we bring every part of hands-on technology learning together.</p>
           </div>
-          <div className="mt-10 grid grid-cols-1 divide-y divide-surface-container md:grid-cols-2 md:divide-y-0 lg:grid-cols-4">
+          <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4 lg:gap-5">
             {schoolSolutions.map((item) => {
               const Icon = item.icon;
 
               return (
-                <article key={item.title} className="flex min-h-48 flex-col py-8 first:pt-0 last:pb-0 md:px-8 md:py-10 md:[&:nth-child(odd)]:border-r md:[&:nth-child(-n+2)]:border-b lg:min-h-56 lg:border-r lg:px-8 lg:py-0 lg:[&:nth-child(-n+2)]:border-b-0 lg:first:pl-0 lg:last:border-r-0 lg:last:pr-0">
-                  <Icon aria-hidden="true" className="h-5 w-5 text-secondary" strokeWidth={1.75} />
-                  <h3 className="mt-5 font-display text-lg font-bold leading-snug text-on-surface">{item.title}</h3>
-                  <p className="mt-3 max-w-xs text-sm leading-relaxed text-on-surface-variant">{item.description}</p>
+                <article key={item.title} className="school-solution-card flex min-h-72 flex-col rounded-2xl border border-surface-container border-b-4 bg-surface-container-lowest p-6 sm:p-7">
+                  <span className="flex h-20 w-20 items-center justify-center rounded-full bg-surface-container-low">
+                    <Icon aria-hidden="true" className="school-accent-text h-10 w-10" strokeWidth={1.5} />
+                  </span>
+                  <h3 className="mt-6 font-display text-xl font-bold leading-snug text-on-surface">{item.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-on-surface-variant">{item.description}</p>
                 </article>
               );
             })}
           </div>
-          <a href="/for-schools" onClick={(event) => { event.preventDefault(); onNavigate('for-schools'); }} className="group mt-10 inline-flex items-center gap-2 font-display text-sm font-bold text-secondary underline-offset-4 transition-colors hover:text-primary hover:underline focus-visible:rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary">
-            Explore school solutions <ArrowRight aria-hidden="true" className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </a>
+          <div className="mt-10 flex flex-col items-center gap-6 rounded-3xl border border-surface-container bg-surface-container-lowest px-6 py-6 text-center sm:flex-row sm:text-left lg:px-8">
+            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-surface-container-low"><Rocket aria-hidden="true" className="school-accent-text h-7 w-7" strokeWidth={1.6} /></span>
+            <div className="sm:flex-1">
+              <h3 className="font-display text-xl font-extrabold tracking-tight text-on-surface">One partner. Complete school innovation ecosystem.</h3>
+              <p className="mt-1 text-sm leading-relaxed text-on-surface-variant">Infrastructure, learning resources, and educator support designed to grow with your school.</p>
+            </div>
+            <a href="/for-schools" onClick={(event) => { event.preventDefault(); onNavigate('for-schools'); }} className="school-accent-bg inline-flex shrink-0 items-center gap-2 rounded-xl px-5 py-3 font-display text-sm font-bold transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary">
+              Explore school solutions <ArrowRight aria-hidden="true" className="h-4 w-4" />
+            </a>
+          </div>
         </div>
       </section>
 
