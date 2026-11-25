@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowRight, Blocks, BookOpen, Code2, GraduationCap, Presentation, Rocket, School, Table2, Wrench } from 'lucide-react';
+import { ArrowRight, Blocks, BookOpen, Box, ChartNoAxesCombined, Code2, Droplets, Flame, FlaskConical, GraduationCap, Handshake, Lightbulb, Presentation, Radio, Rocket, School, Settings, Table2, Wrench } from 'lucide-react';
 import { STEM_KITS_DATA } from '../data/kits.ts';
 import { STUDENT_PROJECTS_DATA } from '../data/projects.ts';
 import { NavigationPath } from '../types.ts';
@@ -24,6 +24,22 @@ const heroHighlights = [
   { label: 'Future-ready skills', icon: Rocket },
 ];
 
+const innovationPillars = [
+  { icon: GraduationCap, title: 'NEP 2020 Aligned Framework', description: 'Experiential, project-based learning that supports the principles of NEP 2020.' },
+  { icon: Code2, title: 'Industry Relevant Tech Stack', description: 'Explore tools and technologies including coding, robotics, AI, and IoT.' },
+  { icon: ChartNoAxesCombined, title: 'Structured Growth Pathway', description: 'Progress from foundational activities to more advanced projects.' },
+  { icon: Lightbulb, title: 'Future Focused Skill Building', description: 'Develop creativity, problem-solving, and practical technology skills.' },
+  { icon: FlaskConical, title: 'Experiential Learning by Design', description: 'Learn by doing through hands-on activities and real-world projects.' },
+  { icon: Handshake, title: 'Trusted Learning Partner', description: 'Teacher training and ongoing guidance support implementation at your school.' },
+];
+
+const learningJourney = [
+  { title: 'Explore', description: 'Discover concepts and technologies.', image: '/assets/aistudio/Image_6_f94c54b2.jpeg', alt: 'Student exploring technology in a STEM lab' },
+  { title: 'Learn', description: 'Understand through hands-on activities.', image: '/assets/aistudio/Image_1_360de192.jpeg', alt: 'Students learning together in a robotics lab' },
+  { title: 'Build', description: 'Create projects and prototypes.', image: '/assets/aistudio/Image_1_360de192.jpeg', alt: 'Students building a robotics project' },
+  { title: 'Innovate', description: 'Solve real-world problems and bring ideas to life.', image: STUDENT_PROJECTS_DATA[0].imageUrl, alt: 'Student-built fire-fighting rover' },
+];
+
 // Set this when the dedicated shop is ready. The action remains disabled until then.
 const STEM_KITS_SHOP_URL: string | null = null;
 
@@ -33,18 +49,21 @@ const featuredStemKits = [
     grades: 'Grades 1–3',
     description: 'Hands-on electronics and simple circuits for curious young learners.',
     imageUrl: STEM_KITS_DATA[0].imageUrl,
+    skills: ['Basic electronics', 'Creative projects', 'Logic & thinking'],
   },
   {
     title: 'Mechanical & Sensor Robotics',
     grades: 'Grades 4–6',
     description: 'Build robots and explore sensors, movement, and block coding.',
     imageUrl: STEM_KITS_DATA[2].imageUrl,
+    skills: ['Coding basics', 'Sensors & automation', 'Robot building'],
   },
   {
     title: 'IoT & Smart Environment Hub',
     grades: 'Grades 7–9',
     description: 'Explore connected devices, environmental monitoring, and automation.',
     imageUrl: STEM_KITS_DATA[1].imageUrl,
+    skills: ['IoT applications', 'Data monitoring', 'Smart solutions'],
   },
 ];
 
@@ -148,20 +167,31 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      <section className="w-full bg-surface py-16 sm:py-20 lg:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="max-w-2xl">
-            <h2 className="font-display text-3xl font-extrabold leading-tight tracking-tight text-on-surface sm:text-4xl">STEM &amp; Robotics Kits</h2>
-            <p className="mt-4 text-base leading-relaxed text-on-surface-variant">Hands-on kits designed to grow with students as they explore, build, and invent.</p>
+      <section className="school-solutions relative w-full overflow-hidden bg-surface py-16 sm:py-20 lg:py-24">
+        <span aria-hidden="true" className="school-solution-corner absolute -left-12 -top-12 hidden h-32 w-32 rounded-[2.5rem] lg:block" />
+        <span aria-hidden="true" className="school-solution-dot-mesh absolute bottom-10 right-6 hidden h-16 w-16 lg:block" />
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
+          <div className="mx-auto max-w-4xl text-center">
+            <p className="school-accent-outline school-accent-text inline-flex items-center gap-2 rounded-full border px-3 py-1.5 font-display text-xs font-bold uppercase tracking-widest"><Box aria-hidden="true" className="h-4 w-4" /> STEM &amp; Robotics Kits</p>
+            <h2 className="mt-5 font-display text-3xl font-extrabold leading-tight tracking-tight text-on-surface sm:text-4xl lg:text-5xl">Hands-on kits for <span className="school-accent-text">every learning stage.</span></h2>
+            <p className="mt-5 text-base leading-relaxed text-on-surface-variant sm:text-lg">Hands-on kits designed to grow with students as they explore, build, and invent.</p>
           </div>
           <div className="mt-10 grid gap-5 lg:grid-cols-3 lg:gap-6">
             {featuredStemKits.map((kit) => (
-              <article key={kit.title} className="overflow-hidden rounded-2xl border border-surface-container bg-surface-container-lowest">
-                <img src={kit.imageUrl} alt={kit.title} className="h-52 w-full object-cover sm:h-60" />
+              <article key={kit.title} className="school-solution-card overflow-hidden rounded-2xl border border-surface-container border-b-4 bg-surface-container-lowest">
+                <div className="relative">
+                  <img src={kit.imageUrl} alt={kit.title} className="h-52 w-full object-cover sm:h-60" />
+                  <p className="school-accent-bg absolute left-4 top-4 rounded-full px-4 py-1.5 font-display text-xs font-bold uppercase tracking-wider">{kit.grades}</p>
+                </div>
                 <div className="p-6 sm:p-7">
-                  <p className="font-display text-xs font-bold uppercase tracking-wider text-secondary">{kit.grades}</p>
-                  <h3 className="mt-3 font-display text-xl font-bold leading-snug text-on-surface">{kit.title}</h3>
+                  <h3 className="font-display text-xl font-bold leading-snug text-on-surface">{kit.title}</h3>
                   <p className="mt-3 text-sm leading-relaxed text-on-surface-variant">{kit.description}</p>
+                  <div className="mt-6 grid grid-cols-3 divide-x divide-surface-container text-center">
+                    {kit.skills.map((skill, index) => {
+                      const Icon = [Lightbulb, Radio, Settings][index];
+                      return <div key={skill} className="flex flex-col items-center gap-2 px-2"><Icon aria-hidden="true" className="school-accent-text h-5 w-5" /><span className="text-xs font-semibold leading-snug text-on-surface">{skill}</span></div>;
+                    })}
+                  </div>
                 </div>
               </article>
             ))}
@@ -175,22 +205,61 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      <section className="w-full bg-surface py-16 sm:py-20">
-        <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16">
-          <img src={project.imageUrl} alt={project.title} className="h-72 w-full rounded-2xl object-cover shadow-md sm:h-80" />
+      <section className="school-solutions relative overflow-hidden border-y border-surface-container bg-surface-container-low py-16 sm:py-20 lg:py-24">
+        <span aria-hidden="true" className="school-solution-corner absolute -left-12 -top-12 hidden h-32 w-32 rounded-[2.5rem] lg:block" />
+        <span aria-hidden="true" className="school-solution-dot-mesh absolute right-6 top-8 hidden h-16 w-16 lg:block" />
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
+          <div className="mx-auto max-w-5xl text-center">
+            <p className="school-accent-outline school-accent-text inline-flex items-center gap-2 rounded-full border px-3 py-1.5 font-display text-xs font-bold uppercase tracking-widest"><Lightbulb aria-hidden="true" className="h-4 w-4" /> Why Brain Up Labs?</p>
+            <h2 className="mt-5 font-display text-3xl font-extrabold leading-tight tracking-tight text-on-surface sm:text-4xl lg:text-5xl">More than kits. <span className="school-accent-text">A complete innovation ecosystem.</span></h2>
+            <p className="mt-5 text-base leading-relaxed text-on-surface-variant sm:text-lg">Six pillars supporting hands-on technology education for schools, educators and students.</p>
+          </div>
+          <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {innovationPillars.map(({ icon: Icon, title, description }) => <article key={title} className="school-solution-card flex items-center gap-5 rounded-2xl border border-surface-container border-b-4 bg-surface-container-lowest p-6"><span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-surface-container-low"><Icon aria-hidden="true" className="school-accent-text h-8 w-8" strokeWidth={1.5} /></span><div className="border-l border-surface-container-high pl-5"><h3 className="font-display text-lg font-bold leading-snug text-on-surface">{title}</h3><p className="mt-2 text-sm leading-relaxed text-on-surface-variant">{description}</p></div></article>)}
+          </div>
+        </div>
+      </section>
+
+      <section className="school-solutions relative overflow-hidden bg-surface py-16 sm:py-20 lg:py-24">
+        <span aria-hidden="true" className="school-solution-dot-mesh absolute bottom-8 left-4 hidden h-16 w-16 lg:block" />
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
+          <div className="mx-auto max-w-5xl text-center">
+            <p className="school-accent-outline school-accent-text inline-flex items-center gap-2 rounded-full border px-3 py-1.5 font-display text-xs font-bold uppercase tracking-widest"><Settings aria-hidden="true" className="h-4 w-4" /> How it works</p>
+            <h2 className="mt-5 font-display text-3xl font-extrabold leading-tight tracking-tight text-on-surface sm:text-4xl lg:text-5xl">From classroom concepts to <span className="school-accent-text">real-world creations.</span></h2>
+            <p className="mt-5 text-base leading-relaxed text-on-surface-variant sm:text-lg">A simple and engaging journey to build skills, spark creativity, and innovate.</p>
+          </div>
+          <ol className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {learningJourney.map((step, index) => <li key={step.title} className="flex flex-col rounded-2xl border border-surface-container bg-surface-container-lowest p-5 text-center"><span className="school-accent-text mx-auto font-display text-sm font-extrabold">0{index + 1}</span><h3 className="mt-2 font-display text-xl font-bold text-on-surface">{step.title}</h3><p className="mt-2 flex-1 text-sm leading-relaxed text-on-surface-variant">{step.description}</p><img src={step.image} alt={step.alt} loading="lazy" className="mt-5 aspect-[3/2] w-full rounded-xl object-cover" /></li>)}
+          </ol>
+          <div className="mt-10 flex flex-col items-center gap-5 rounded-3xl bg-inverse-surface px-6 py-6 text-center text-inverse-on-surface sm:flex-row sm:text-left lg:px-8"><Rocket aria-hidden="true" className="school-accent-text h-9 w-9 shrink-0" /><h3 className="flex-1 font-display text-xl font-extrabold sm:text-2xl">Let’s build <span className="school-accent-text">future innovators</span> together.</h3><a href="/for-schools" onClick={(event) => { if (!event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey && event.button === 0) { event.preventDefault(); onNavigate('for-schools'); } }} className="school-accent-bg inline-flex items-center gap-2 rounded-xl px-5 py-3 font-display text-sm font-bold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary">Explore our solutions <ArrowRight aria-hidden="true" className="h-4 w-4" /></a></div>
+        </div>
+      </section>
+
+      <section className="school-solutions relative w-full overflow-hidden bg-surface-container-low py-16 sm:py-20 lg:py-24">
+        <span aria-hidden="true" className="school-solution-dot-mesh absolute right-6 top-8 hidden h-16 w-16 lg:block" />
+        <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16">
+          <div className="relative">
+            <span aria-hidden="true" className="school-solution-corner absolute -left-4 -top-4 h-32 w-36 rounded-3xl sm:-left-6 sm:-top-6" />
+            <img src={project.imageUrl} alt={project.title} className="relative aspect-[4/3] w-full rounded-3xl border-4 border-surface-container-lowest object-cover shadow-md" />
+          </div>
           <div>
-            <p className="font-display text-xs font-bold uppercase tracking-widest text-secondary">Student work</p>
-            <h2 className="mt-2 font-display text-3xl font-extrabold tracking-tight text-on-surface sm:text-4xl">{project.title}</h2>
-            <p className="mt-4 text-base leading-relaxed text-on-surface-variant">{project.description}</p>
-            <p className="mt-4 text-sm font-semibold text-on-surface">{project.studentClass} · {project.schoolName}</p>
-            <button onClick={() => onNavigate('projects')} className="mt-6 inline-flex items-center gap-2 rounded-xl border border-surface-container-high bg-surface-container-lowest px-5 py-3 font-display text-sm font-bold text-on-surface transition-colors hover:bg-surface-container-high">
-              View Student Projects <span aria-hidden="true">→</span>
+            <p className="school-accent-outline school-accent-text inline-flex items-center gap-2 rounded-full border px-3 py-1.5 font-display text-xs font-bold uppercase tracking-widest"><GraduationCap aria-hidden="true" className="h-4 w-4" /> Student work</p>
+            <h2 className="mt-5 font-display text-3xl font-extrabold leading-tight tracking-tight text-on-surface sm:text-4xl">Autonomous <span className="school-accent-text">Fire-fighting Rover</span></h2>
+            <p className="mt-5 text-base leading-relaxed text-on-surface-variant">{project.description}</p>
+            <p className="mt-5 flex items-center gap-2 text-sm font-semibold text-on-surface"><School aria-hidden="true" className="school-accent-text h-5 w-5 shrink-0" /> {project.studentClass} · {project.schoolName}</p>
+            <div className="mt-7 grid grid-cols-3 divide-x divide-surface-container text-center">
+              {[{ icon: Flame, title: 'Fire detection', description: 'Locates flames with thermal sensors.' }, { icon: Settings, title: 'Autonomous action', description: 'Operates without human intervention.' }, { icon: Droplets, title: 'Fire extinguishing', description: 'Activates a pressurized pump.' }].map(({ icon: Icon, title, description }) => (
+                <div key={title} className="flex flex-col items-center gap-2 px-2 sm:px-4"><Icon aria-hidden="true" className="school-accent-text h-7 w-7" /><h3 className="font-display text-sm font-bold leading-snug text-on-surface">{title}</h3><p className="text-xs leading-relaxed text-on-surface-variant">{description}</p></div>
+              ))}
+            </div>
+            <button onClick={() => onNavigate('projects')} className="school-accent-bg mt-8 inline-flex items-center gap-2 rounded-xl px-6 py-3.5 font-display text-sm font-bold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary">
+              View Student Projects <ArrowRight aria-hidden="true" className="h-4 w-4" />
             </button>
           </div>
         </div>
       </section>
 
-      <FAQSection openFaqIndex={openFaqIndex} onToggle={(index) => setOpenFaqIndex(openFaqIndex === index ? null : index)} limit={3} />
+      <FAQSection openFaqIndex={openFaqIndex} onToggle={(index) => setOpenFaqIndex(openFaqIndex === index ? null : index)} onNavigate={onNavigate} />
       <FinalCtaSection onNavigate={onNavigate} />
     </div>
   );
